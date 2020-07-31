@@ -1,0 +1,194 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "fahrtdauer berechnung",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "Bitte hilf mir",
+            "Wie bediene ich diesen Skill"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "FahrtdauerBerechnenIntent",
+          "slots": [
+            {
+              "name": "Abfahrtsort",
+              "type": "Ort",
+              "samples": [
+                " {Abfahrtsort}",
+                "Ich starte von {Abfahrtsort}",
+                "Abfahrtsort ist {Abfahrtsort}",
+                "Ich möchte in {Abfahrtsort} losfahren"
+              ]
+            },
+            {
+              "name": "Zielort",
+              "type": "Ort",
+              "samples": [
+                " {Zielort}",
+                "Ich möchte nach {Zielort}",
+                "Zielort ist {Zielort}",
+                "Mein Ziel ist {Zielort}"
+              ]
+            }
+          ],
+          "samples": [
+            "Berechne die Reisezeit",
+            "Berechne die Reisezeit für eine Fahrt von {Abfahrtsort} nach {Zielort}",
+            "Wie lange dauert die Fahrt von {Abfahrtsort} nach {Zielort}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "Braunschweig"
+              }
+            },
+            {
+              "name": {
+                "value": "Hamburg"
+              }
+            },
+            {
+              "name": {
+                "value": "Bremen"
+              }
+            },
+            {
+              "name": {
+                "value": "Kiel",
+                "synonyms": [
+                  "kill",
+                  "kühl"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Berlin",
+                "synonyms": [
+                  "Bärlin"
+                ]
+              }
+            }
+          ],
+          "name": "Ort"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "FahrtdauerBerechnenIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Abfahrtsort",
+              "type": "Ort",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FahrtdauerBerechnenIntentSlot-Abfahrtsort"
+              },
+              "validations": [
+                {
+                  "type": "isNotInSet",
+                  "prompt": "Slot.Validation.706283808643.489346757606",
+                  "values": [
+                    "Hannover",
+                    "Peine West"
+                  ]
+                },
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.567876239340.5927560473956"
+                }
+              ]
+            },
+            {
+              "name": "Zielort",
+              "type": "Ort",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Intent-FahrtdauerBerechnenIntentSlot-Zielort"
+              },
+              "validations": [
+                {
+                  "type": "isNotInSet",
+                  "prompt": "Slot.Validation.706283808643.489346757606",
+                  "values": [
+                    "Hannover",
+                    "Peine West"
+                  ]
+                },
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.567876239340.5927560473956"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Intent-FahrtdauerBerechnenIntentSlot-Abfahrtsort",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Von wo möchtes du starten?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Intent-FahrtdauerBerechnenIntentSlot-Zielort",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "An welchen Ort möchtest du reisen?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.706283808643.489346757606",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Nach Hannover oder Peine-West fahre ich nicht. Versuche es nochmal."
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.567876239340.5927560473956",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Diesen Ort kenne ich nicht und kann deshalb keine Fahrtdauer berechnen."
+          }
+        ]
+      }
+    ]
+  },
+  "version": "2"
+}
